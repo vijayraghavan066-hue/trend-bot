@@ -1,0 +1,22 @@
+[Unit]
+Description=trend-bot (BTC/ETH/SOL weekly volatility-targeted trend-following)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=trendbot
+Group=trendbot
+WorkingDirectory=/opt/trend-bot
+EnvironmentFile=/opt/trend-bot/.env
+ExecStart=/opt/trend-bot/.venv/bin/python /opt/trend-bot/bot.py
+Restart=on-failure
+RestartSec=15
+
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/opt/trend-bot
+
+[Install]
+WantedBy=multi-user.target
